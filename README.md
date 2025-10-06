@@ -20,7 +20,7 @@ DenseMarks predicts per-pixel positions in canonical space (cube [0, 1]³) from 
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/densemarks.git
+   git clone https://github.com/diddone/densemarks.git
    cd densemarks
    ```
 
