@@ -1,3 +1,4 @@
+python>=3.10 # for dinov3, one can fix | to Optional in third_party_dinov3/hub/backbones.py
 torch>=1.9.0
 torchvision>=0.10.0
 transformers>=4.20.0
