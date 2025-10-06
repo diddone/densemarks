@@ -31,7 +31,11 @@ DenseMarks predicts per-pixel positions in canonical space (cube [0, 1]³) from 
 
 3. **Modify DINOv3 for compatibility:**
    ```bash
-   sed -i '/dinov3\.hub\.segmentors/s/^/#/' third_party_dinov3/hubconf.py
+   # For Linux (GNU sed):
+   sed -i '/dinov3\.hub\.segmentors/s/^/#/; /dinov3\.hub\.classifiers/s/^/#/; /dinov3\.hub\.detectors/s/^/#/; /dinov3\.hub\.dinotxt/s/^/#/; /dinov3\.hub\.depthers/s/^/#/' third_party_dinov3/hubconf.py
+
+   # For macOS (BSD sed):
+   sed -i '' '/dinov3\.hub\.segmentors/s/^/#/; /dinov3\.hub\.classifiers/s/^/#/; /dinov3\.hub\.detectors/s/^/#/; /dinov3\.hub\.dinotxt/s/^/#/; /dinov3\.hub\.depthers/s/^/#/' third_party_dinov3/hubconf.py
    ```
 
 4. **Install dependencies:**

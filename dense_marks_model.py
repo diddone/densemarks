@@ -4,7 +4,7 @@ Standalone DenseMarks Model
 A self-contained model class that loads a trained model from weights and performs
 inference to produce UVW coordinates (B x 3 x H x W) from input images.
 
-Dependencies: torch, numpy, transformers
+Dependencies: torch, numpy, transformers, safetensors
 """
 
 import os
@@ -15,6 +15,7 @@ import numpy as np
 from pathlib import Path
 from transformers import Dinov2Config, DPTConfig, DPTForDepthEstimation
 from PIL import Image
+from safetensors import safe_open
 
 def read_image(image_path):
     return np.array(Image.open(image_path).convert("RGB"))
@@ -236,9 +237,17 @@ class DenseMarksModel(nn.Module):
         """
         print(f"Loading weights from: {weights_path}")
 
-        # Load checkpoint
-        checkpoint = torch.load(weights_path, map_location='cpu')
-        model_state_dict = checkpoint['model']
+        # Check if it's a safetensors file
+        if weights_path.endswith('.safetensors'):
+            # Load safetensors file
+            model_state_dict = {}
+            with safe_open(weights_path, framework="pt", device="cpu") as f:
+                for key in f.keys():
+                    model_state_dict[key] = f.get_tensor(key)
+        else:
+            # Load regular PyTorch checkpoint
+            checkpoint = torch.load(weights_path, map_location='cpu')
+            model_state_dict = checkpoint['model']
 
         # Create new state dict with proper key mapping
         new_state_dict = {}
@@ -342,5 +351,6 @@ if __name__ == "__main__":
     model = DenseMarksModel(hf_hub_download("diddone/densemarks", "model.safetensors"))
     images = read_image("assets/00000.png")
     print(f"Input shape: {images.shape}")
+    uvw = model(images)
     print(f"Output UVW shape: {uvw.shape}")
     print(f"UVW range: [{uvw.min():.3f}, {uvw.max():.3f}]")
