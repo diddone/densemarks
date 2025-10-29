@@ -1,14 +1,22 @@
 # DenseMarks
 
-A PyTorch implementation for dense UVW coordinate prediction from human head images using DINOv3 backbone with DPT head architecture.
+A PyTorch implementation for dense UVW coordinate prediction from human head images using a DINOv3 backbone and a DPT-style head architecture.
 
 ## Overview
 
-DenseMarks predicts per-pixel positions in canonical space (cube [0, 1]³) from human head images.
+DenseMarks predicts per-pixel positions in the canonical space (cube $[0, 1] ^ 3$) from human head images.
 
-**Input**: RGB images of size 512×512 pixels
+- **Input:** RGB image of size 512×512  
+- **Output:** UVW coordinate tensor `(B, 3, 512, 512)` with values in `[0, 1]`
 
-**Output**: UVW coordinates tensor (B, 3, 512, 512) with values in [0, 1]
+---
+
+## 🚀 Current Status
+
+DenseMarks currently supports **inference only** — you can run the model to generate dense UVW predictions from input images.  
+🧠 **Training support is coming soon!** Stay tuned :)
+
+---
 
 ## Prerequisites
 
