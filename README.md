@@ -2,6 +2,9 @@
 
 A PyTorch implementation for dense UVW coordinate prediction from human head images using a DINOv3 backbone and a DPT-style head architecture.
 
+[![Project Page](https://img.shields.io/badge/Project-Page-blue?style=for-the-badge)](https://diddone.github.io/densemarks/)
+[![YouTube](https://img.shields.io/badge/YouTube-Video-red?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/vVuSXFeZNL8)
+
 ## Overview
 
 DenseMarks predicts per-pixel positions in the canonical space (cube $[0, 1] ^ 3$) from human head images.
