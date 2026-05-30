@@ -3,7 +3,7 @@
 Dense canonical embeddings covering full human head. PyTorch + ViT + DPT.
 
 [![Project Page](https://img.shields.io/badge/Project-Page-blue?style=for-the-badge)](https://diddone.github.io/densemarks/)
-[![YouTube](https://img.shields.io/badge/YouTube-Video-red?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/vVuSXFeZNL8)
+[![YouTube](https://img.shields.io/badge/YouTube-Video-red?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/o8DOOYFW0gI)
 
 ## Overview
 
