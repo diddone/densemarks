@@ -1,6 +1,6 @@
 # DenseMarks
 
-Dense canonical embeddings covering full human head. PyTorch + ViT + DPT.
+We propose a replacement of standard face landmarks with a dense per-pixel embeddings of a full human head that live in 3D canonical space, consistent across subjects and poses. Predicted embeddings enable a variety of applications, ranging from head tracking to MVS.
 
 [![Project Page](https://img.shields.io/badge/Project-Page-blue?style=for-the-badge)](https://diddone.github.io/densemarks/)
 [![arXiv](https://img.shields.io/badge/arXiv-2511.02830-b31b1b?style=for-the-badge&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2511.02830)
@@ -8,7 +8,7 @@ Dense canonical embeddings covering full human head. PyTorch + ViT + DPT.
 
 ## Overview
 
-DenseMarks predicts per-pixel positions in the canonical space (cube $[0, 1] ^ 3$) from human head images.
+DenseMarks predicts per-pixel positions in the canonical space (cube $[0, 1] ^ 3$) from human head images. The architecture is ViT + DPT head.
 
 - **Input:** RGB image of size 512×512
 - **Output:** UVW coordinate tensor `(B, 3, 512, 512)` with values in `[0, 1]`
