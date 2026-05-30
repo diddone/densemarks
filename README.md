@@ -9,14 +9,14 @@ Dense canonical embeddings covering full human head. PyTorch + ViT + DPT.
 
 DenseMarks predicts per-pixel positions in the canonical space (cube $[0, 1] ^ 3$) from human head images.
 
-- **Input:** RGB image of size 512×512  
+- **Input:** RGB image of size 512×512
 - **Output:** UVW coordinate tensor `(B, 3, 512, 512)` with values in `[0, 1]`
 
 ---
 
 ## 🚀 Current Status
 
-DenseMarks currently supports **inference only** — you can run the model to generate dense UVW predictions from input images.  
+DenseMarks currently supports **inference only** — you can run the model to generate dense UVW predictions from input images.
 🧠 **Training support is coming soon!** Stay tuned :)
 
 ---
@@ -65,7 +65,7 @@ DenseMarks currently supports **inference only** — you can run the model to ge
 
 ## Citation
 
-If you find this repo helpful, please consider cite the following.
+If you find this repo helpful, please consider cite our work:
 
 ```bibtex
 @inproceedings{pozdeev2026densemarks,
