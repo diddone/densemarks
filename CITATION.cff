@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you find this repo helpful, please consider cite the following."
+title: "DenseMarks: Learning Canonical Embeddings for Human Heads Images via Point Tracks"
+authors:
+  - family-names: Pozdeev
+    given-names: Dmitrii
+    affiliation: TUM
+  - family-names: Artemov
+    given-names: Alexey
+    affiliation: TUM
+  - family-names: Bhattarai
+    given-names: Ananta R.
+    affiliation: University of Bielefeld
+  - family-names: Sevastopolsky
+    given-names: Artem
+    affiliation: TUM
+url: "https://github.com/diddone/densemarks"
+date-released: 2026-05-30
+preferred-citation:
+  type: conference-paper
+  title: "DenseMarks: Learning Canonical Embeddings for Human Heads Images via Point Tracks"
+  authors:
+    - family-names: Pozdeev
+      given-names: Dmitrii
+    - family-names: Artemov
+      given-names: Alexey
+    - family-names: Bhattarai
+      given-names: Ananta R.
+    - family-names: Sevastopolsky
+      given-names: Artem
+  conference:
+    name: "The Fourteenth International Conference on Learning Representations"
+  year: 2026
+  url: "https://openreview.net/forum?id=KOvRxAMBzV"

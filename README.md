@@ -1,6 +1,6 @@
 # DenseMarks
 
-A PyTorch implementation for dense UVW coordinate prediction from human head images using a DINOv3 backbone and a DPT-style head architecture.
+Dense canonical embeddings covering full human head. PyTorch + ViT + DPT.
 
 [![Project Page](https://img.shields.io/badge/Project-Page-blue?style=for-the-badge)](https://diddone.github.io/densemarks/)
 [![YouTube](https://img.shields.io/badge/YouTube-Video-red?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/vVuSXFeZNL8)
@@ -62,3 +62,17 @@ DenseMarks currently supports **inference only** — you can run the model to ge
    images = read_image("assets/00000.png") # rgb, 512x512
    uvw = model(images) # Predict UVW coordinates
    ```
+
+## Citation
+
+If you find this repo helpful, please consider cite the following.
+
+```bibtex
+@inproceedings{pozdeev2026densemarks,
+  title={Densemarks: Learning Canonical Embeddings for Human Heads Images via Point Tracks},
+  author={Dmitrii Pozdeev and Alexey Artemov and Ananta R. Bhattarai and Artem Sevastopolsky},
+  booktitle={The Fourteenth International Conference on Learning Representations},
+  year={2026},
+  url={https://openreview.net/forum?id=KOvRxAMBzV}
+}
+```
