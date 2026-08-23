@@ -1,0 +1,37 @@
+# Private research repo, kept locally as a reference source for the training port
+dense_lmks/
+
+# Internal planning / agent scratch (not part of the public port)
+tasks/
+TODO.md
+diffs.md
+
+# Third-party
+third_party_dinov3/
+
+# Checkpoints and training output
+*.pth
+*.pt
+*.safetensors
+experiments/
+output/
+runs/
+wandb/
+
+# Python / tooling
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Editors / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+tests/

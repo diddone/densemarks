@@ -1,8 +1,6 @@
 """
-Standalone DenseMarks Model
-
-A self-contained model class that loads a trained model from weights and performs
-inference to produce UVW coordinates (B x 3 x H x W) from input images.
+Standalone DenseMarks model: loads trained weights and predicts UVW coordinates
+(B x 3 x H x W) from input images. Inference only — see DenseMarksModel below.
 
 Dependencies: torch, numpy, transformers, safetensors
 """
@@ -194,7 +192,9 @@ class Predictor(nn.Module):
 
 class DenseMarksModel(nn.Module):
     """
-    Standalone DenseMarks model for UVW coordinate prediction.
+    Standalone DenseMarks model for UVW coordinate prediction. Inference only —
+    for training, see `densemarks.model.DenseMarksTrainModel` (train.py); its
+    checkpoints load here directly since both share the same state-dict layout.
 
     This model loads a trained checkpoint and performs inference to produce
     UVW coordinates (B x 3 x H x W) from input images.
