@@ -1,10 +1,6 @@
-# Private research repo, kept locally as a reference source for the training port
-dense_lmks/
-
-# Internal planning / agent scratch (not part of the public port)
-tasks/
-TODO.md
-diffs.md
+# Private/scratch work not part of the public port (dev notes, preprocessing
+# scripts under review, private tests, research reference code, sample data)
+local/
 
 # Third-party
 third_party_dinov3/
@@ -34,4 +30,3 @@ venv/
 .vscode/
 *.swp
 .DS_Store
-tests/

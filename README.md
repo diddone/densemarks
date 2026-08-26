@@ -75,8 +75,8 @@ Model weights are downloaded automatically from Hugging Face on first use — se
 
 ```
 data_dir/
-  train_tracked_points_paths.pkl     # pickled list of paths to per-video pred_tracks.pt
-  val_tracked_points_paths.pkl
+  train_tracked_points_paths.json    # JSON array of paths to per-video pred_tracks.pt
+  val_tracked_points_paths.json
   <video_id>/
     pred_tracks.pt        # [1, T, P, 2] float, (x, y) pixel coords per tracked point
     pred_visibility.pt    # [1, T, P] bool  (or [1, T, P, 2] for AllTracker: vis * conf)
@@ -87,6 +87,16 @@ data_dir/
 ```
 
 Data requires separate preprocessing (not supported in this repo). In the paper we used CelebV-HQ, with CoTracker3 for point tracks, MediaPipe for landmarks, and face parsing for segmentation masks.
+
+`train_tracked_points_paths.json` and `val_tracked_points_paths.json` are not auto-generated — hand-write them after preprocessing. Each is a JSON array of strings, one per video, pointing to that video's `pred_tracks.pt`. Only the parent folder name is used, so a path relative to `data_dir` like `"<video_id>/pred_tracks.pt"` is simplest:
+
+```json
+[
+  "video001/pred_tracks.pt",
+  "video002/pred_tracks.pt",
+  "video003/pred_tracks.pt"
+]
+```
 
 ### Running training
 

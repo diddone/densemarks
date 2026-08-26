@@ -3,8 +3,8 @@
 On-disk layout under ``cfg.data_dir``::
 
     data_dir/
-      train_tracked_points_paths.pkl   # pickled list of paths to per-video pred_tracks.pt
-      val_tracked_points_paths.pkl
+      train_tracked_points_paths.json  # JSON array of paths to per-video pred_tracks.pt
+      val_tracked_points_paths.json
       <video_id>/
         pred_tracks.pt                 # [1, T, P, 2] float, (x, y) pixel coords
         pred_visibility.pt             # [1, T, P] bool, or [1, T, P, 2] (vis * conf)
@@ -23,9 +23,9 @@ region is class 3 with the face classes painted on top.
 
 from __future__ import annotations
 
+import json
 import logging
 import os
-import pickle
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -317,20 +317,20 @@ class DenseMarksDataset:
 
         self.fixed_lmks_idx = _require_mediapipe_asset(cfg.mediapipe_lmks_idx_file)
 
-        # Intersect the split pickle with folders that actually have tracks on disk.
+        # Intersect the split JSON with folders that actually have tracks on disk.
         split = "train" if is_train else "val"
         path_to_tracked_points_paths = os.path.join(
-            cfg.data_dir, f"{split}_tracked_points_paths.pkl"
+            cfg.data_dir, f"{split}_tracked_points_paths.json"
         )
         if not os.path.isfile(path_to_tracked_points_paths):
             raise FileNotFoundError(
                 f"Split file '{path_to_tracked_points_paths}' is missing. "
-                f"Expected '{split}_tracked_points_paths.pkl' under data_dir. "
+                f"Expected '{split}_tracked_points_paths.json' under data_dir. "
                 f"See README for the dataset layout."
             )
 
-        with open(path_to_tracked_points_paths, "rb") as f:
-            points_paths = pickle.load(f)
+        with open(path_to_tracked_points_paths) as f:
+            points_paths = json.load(f)
 
         path_video_folders = [Path(path).parts[-2] for path in points_paths]
         video_folders_with_tracks = [
