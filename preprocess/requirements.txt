@@ -1,0 +1,43 @@
+# Single env for all preprocessing scripts (track_cotracker.py,
+# segment_gsam2.py, landmarks_mediapipe.py). python 3.10, torch 2.3.1+cu121 —
+# needed for the prebuilt pytorch3d wheel and satisfies transformers<5.
+#
+# Install, in order:
+#
+#   uv venv preprocess/.venv --python 3.10
+#   uv pip install --python preprocess/.venv/bin/python \
+#       torch==2.3.1 torchvision==0.18.1 \
+#       --index-url https://download.pytorch.org/whl/cu121
+#   uv pip install --python preprocess/.venv/bin/python \
+#       "https://dl.fbaipublicfiles.com/pytorch3d/packaging/wheels/py310_cu121_pyt231/pytorch3d-0.7.8-cp310-cp310-linux_x86_64.whl"
+#   uv pip install --python preprocess/.venv/bin/python -r preprocess/requirements.txt
+#
+# SAM 2 itself is not a pip package: clone Grounded-SAM-2, download a
+# checkpoint, then install it editable into this same venv:
+#
+#   git clone https://github.com/IDEA-Research/Grounded-SAM-2.git
+#   cd Grounded-SAM-2 && bash checkpoints/download_ckpts.sh
+#   uv pip install --python preprocess/.venv/bin/python -e /path/to/Grounded-SAM-2
+#
+# (prebuilt pytorch3d wheel index: https://dl.fbaipublicfiles.com/pytorch3d/packaging/wheels/<py+cu+torch>/download.html)
+
+# cotracker
+git+https://github.com/facebookresearch/co-tracker.git
+tyro
+imageio
+imageio-ffmpeg
+matplotlib
+flow_vis
+
+# landmarks (mediapipe==0.10.14 pinned - unpinned resolves to 1.0.1, which
+# lacks the legacy mp.solutions API this script needs)
+mediapipe==0.10.14
+scikit-image
+tqdm
+Pillow
+
+# gsam2 (transformers<5 pinned - >=5 silently drops the PyTorch backend
+# needed by torch<2.5)
+transformers<5
+pycocotools
+opencv-python

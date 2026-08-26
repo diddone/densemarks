@@ -61,19 +61,11 @@ class DINOv3DPTEmbedder(nn.Module):
 
     def _load_dinov3_backbone(self):
         """Load DINOv3 backbone using torch.hub.load"""
-        # checkpoint_mapping = {
-        #     "dinov3_vitb16": "dinov3_vitb16_pretrain_lvd1689m-73cec8be.pth",
-        # }
-
-        #backbone_weights = str(Path("/mnt/hdd/checkpoints/") / checkpoint_mapping["dinov3_vitb16"])
-
-        #print(f"Loading DINOv3 model from: {backbone_weights}")
         backbone = torch.hub.load(
             self.dinov3_repo_path,
             "dinov3_vitb16",
             source="local",
             pretrained=False,
-            #weights=backbone_weights
         )
         print(f"✓ Successfully loaded DINOv3 backbone")
 
@@ -86,9 +78,6 @@ class DINOv3DPTEmbedder(nn.Module):
     def process_images(self, images):
         """Preprocess images for DINOv3"""
         images = images.to(self.device)
-
-        # Convert BGR to RGB
-        #images = images[:, [2, 1, 0], :, :]
 
         # Normalize to [0, 1] if needed
         if images.max() > 1.0:
@@ -347,7 +336,6 @@ class DenseMarksModel(nn.Module):
 if __name__ == "__main__":
     # Example of how to use the model
     from huggingface_hub import hf_hub_download
-    #model = DenseMarksModel(hf_hub_download("diddone/densemarks", "pytorch_model.bin"))
     model = DenseMarksModel(hf_hub_download("diddone/densemarks", "model.safetensors"))
     images = read_image("assets/00000.png")
     print(f"Input shape: {images.shape}")

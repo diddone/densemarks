@@ -1,6 +1,6 @@
 # Private/scratch work not part of the public port (dev notes, preprocessing
 # scripts under review, private tests, research reference code, sample data)
-local/
+local_dev/
 
 # Third-party
 third_party_dinov3/

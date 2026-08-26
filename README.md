@@ -69,6 +69,12 @@ See [Installation](#installation) for setup (DINOv3 submodule, dependencies).
 
 Model weights are downloaded automatically from Hugging Face on first use — see [Quick start](#quick-start).
 
+## Data preprocessing
+
+`preprocess/` has scripts to go from raw videos to the data layout used for
+training (point tracks, MediaPipe landmarks, optional GSAM2 masks). See
+[preprocess/README.md](preprocess/README.md).
+
 ## Training
 
 ### Data layout
@@ -86,9 +92,9 @@ data_dir/
     mediapipe/{frame}_vis_mask.npy   # [468] bool
 ```
 
-Data requires separate preprocessing (not supported in this repo). In the paper we used CelebV-HQ, with CoTracker3 for point tracks, MediaPipe for landmarks, and face parsing for segmentation masks.
+In the paper we used CelebV-HQ, with CoTracker3 for point tracks, MediaPipe for landmarks, and face parsing for segmentation masks. `preprocess/` has scripts to produce `images/`, `pred_tracks.pt`/`pred_visibility.pt`, and `mediapipe/` from raw videos (see `preprocess/README.md`); `comb_seg/` (face-parsing segmentation) isn't covered and needs separate tooling.
 
-`train_tracked_points_paths.json` and `val_tracked_points_paths.json` are not auto-generated — hand-write them after preprocessing. Each is a JSON array of strings, one per video, pointing to that video's `pred_tracks.pt`. Only the parent folder name is used, so a path relative to `data_dir` like `"<video_id>/pred_tracks.pt"` is simplest:
+After preprocessing, define the `train_tracked_points_paths.json` and `val_tracked_points_paths.json`. Each is a JSON array of strings, one per video, pointing to that video's `pred_tracks.pt`. Only the parent folder name is used, so a path relative to `data_dir` like `"<video_id>/pred_tracks.pt"` is simplest:
 
 ```json
 [
@@ -108,10 +114,9 @@ python train.py \
 ```
 
 `--dinov3_weights` is required. Training starts from the LVD-1689M DINOv3 ViT-B/16
-checkpoint, which we cannot redistribute — obtain it from
+checkpoint, which can be obtained from
 [facebookresearch/dinov3](https://github.com/facebookresearch/dinov3). Passing
-`--dinov3_weights random` initialises the backbone randomly; that is a smoke-test
-escape hatch and will not reproduce the released model.
+`--dinov3_weights random` initialises the backbone randomly.
 
 Apart from that path, the command uses the published defaults: DINOv3 ViT-B/16 + DPT neck, 512×512, 8 pairs/batch, 140k steps, AdamW at 1e-4 (backbone 1e-5, cube `_E` at 1e-3), cosine decay with 2% linear warmup.
 
@@ -128,7 +133,7 @@ The two are row-aligned: row `i` of the UVW file is the target for the landmark 
 
 ### Memory and resume
 
-~24GB VRAM is enough at 8 pairs/batch (with bf16 autocast). On smaller cards, one can e.g. lower `--pairs_per_batch`.
+~24GB VRAM is enough at 8 pairs/batch (with bf16 autocast). On smaller cards, you can lower `--pairs_per_batch`.
 
 Resume a crashed run with `--resume` (loads `{output_dir}/checkpoint.pt`). Checkpoints are written every `--ckpt_period` steps (default 5000); the final weights are `{output_dir}/model_final.pt`.
 
